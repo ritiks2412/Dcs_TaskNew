@@ -8,5 +8,9 @@ namespace TaskManager.Application.Interfaces
         Task<List<Submission>> GetByFormIdAsync(int formId);
         Task<Submission?> GetByIdAsync(int id);
         Task SaveChangesAsync();
+        Task<List<Submission>> GetByUserIdAsync(int userId);
+        Task<List<Submission>> GetAllAsync();
+
+
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskManager.Application.DTOs.Submission;
+﻿using TaskManager.Application.DTOs.Submission;
 using TaskManager.Domain.Entities;
 
 namespace TaskManager.Application.Interfaces
@@ -13,5 +8,9 @@ namespace TaskManager.Application.Interfaces
         Task<Submission> CreateAsync(CreateSubmissionDto dto, int userId);
         Task<List<Submission>> GetByFormIdAsync(int formId);
         Task<bool> UpdateStatusAsync(UpdateSubmissionStatusDto dto);
+
+        Task<List<SubmissionDto>> GetByUserIdAsync(int userId);
+        Task<List<SubmissionDto>> GetAllAsync();
+
     }
 }

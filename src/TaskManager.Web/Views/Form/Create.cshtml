@@ -1,0 +1,27 @@
+﻿@model TaskManager.Web.Models.CreateFormDto
+
+<h2>Create New Form</h2>
+
+<form method="post">
+    <div>
+        <label>Title</label>
+        <input type="text" name="Title" required />
+    </div>
+
+    <div>
+        <label>Description</label>
+        <textarea name="Description"></textarea>
+    </div>
+
+    <div>
+        <label>Fields (JSON)</label>
+        <textarea name="Fields">{ "firstName": "text", "email": "email" }</textarea>
+    </div>
+
+    <button type="submit">Create</button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}

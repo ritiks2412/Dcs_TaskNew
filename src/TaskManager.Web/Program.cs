@@ -1,3 +1,5 @@
+using TaskManager.Web.Services;
+
 namespace TaskManager.Web
 {
     public class Program
@@ -9,8 +11,16 @@ namespace TaskManager.Web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            var app = builder.Build();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddSession();
+            builder.Services.AddHttpClient<ApiService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7293/"); 
+            });
 
+
+            var app = builder.Build();
+            app.UseSession();
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

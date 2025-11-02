@@ -1,0 +1,18 @@
+﻿@model TaskManager.Web.Models.FormDto
+
+<h2>Fill Form - @Model.Title</h2>
+<form method="post" asp-action="SubmitForm">
+    <input type="hidden" name="formId" value="@Model.Id" />
+
+    <div>
+        <label>Enter Answers (JSON Format)</label>
+        <textarea name="answers" class="form-control" rows="6" required>
+        {
+            "Name": "",
+            "Email": ""
+        }
+        </textarea>
+    </div>
+    <br />
+    <button class="btn btn-success" type="submit">Submit</button>
+</form>

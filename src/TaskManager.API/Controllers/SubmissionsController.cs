@@ -47,5 +47,24 @@ namespace TaskManager.API.Controllers
             return Ok(new { message = $"Submission status updated to {dto.Status}" });
         }
 
+        [Authorize]
+        [HttpGet("my")]
+        public async Task<IActionResult> GetMySubmissions()
+        {
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+            var submissions = await _submissionService.GetByUserIdAsync(userId);
+            return Ok(submissions);
+        }
+
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllSubmissions()
+        {
+            var submissions = await _submissionService.GetAllAsync();
+            return Ok(submissions);
+        }
+
     }
 }

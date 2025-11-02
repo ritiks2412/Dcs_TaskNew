@@ -35,6 +35,23 @@ namespace TaskManager.Infrastructure.Repositories
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 
+        public async Task<List<Submission>> GetByUserIdAsync(int userId)
+        {
+            return await _context.Submissions
+                .Where(s => s.UserId == userId)
+                .Include(s => s.Form)
+                .ToListAsync();
+        }
+
+        public async Task<List<Submission>> GetAllAsync()
+        {
+            return await _context.Submissions
+                .Include(s => s.Form)
+                .Include(s => s.User)
+                .OrderByDescending(s => s.CreatedAt)
+                .ToListAsync();
+        }
+
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();

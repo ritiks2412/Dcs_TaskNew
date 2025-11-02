@@ -1,0 +1,24 @@
+﻿@model List<TaskManager.Web.Models.SubmissionDto>
+
+<h2>My Submissions</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Form</th>
+            <th>Answers</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sub in Model)
+        {
+            <tr>
+                <td>@sub.FormTitle</td>
+                <td>@sub.Answers</td>
+                <td>@sub.Status</td>
+                <td>@sub.CreatedAt.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
+</table>

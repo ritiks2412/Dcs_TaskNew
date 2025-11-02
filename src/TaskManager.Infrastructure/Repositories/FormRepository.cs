@@ -21,7 +21,7 @@ namespace TaskManager.Infrastructure.Repositories
 
         public async Task AddAsync(Form form) => await _context.Forms.AddAsync(form);
 
-        public async Task UpdateAsync(Form form) => _context.Forms.Update(form);
+        public async Task UpdateAsync(Form form) =>  _context.Forms.Update(form);
 
         public async Task DeleteAsync(Form form) => _context.Forms.Remove(form);
 

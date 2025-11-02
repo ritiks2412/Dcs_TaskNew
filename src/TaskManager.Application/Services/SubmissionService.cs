@@ -49,5 +49,14 @@ namespace TaskManager.Application.Services
             return true;
         }
 
+        Task<List<SubmissionDto>> ISubmissionService.GetByUserIdAsync(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<SubmissionDto>> ISubmissionService.GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
