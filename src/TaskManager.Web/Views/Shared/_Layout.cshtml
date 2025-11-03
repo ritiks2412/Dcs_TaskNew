@@ -38,6 +38,15 @@
                                 <a class="nav-link text-dark" asp-controller="Form" asp-action="Index">Forms</a>
                             </li>
                         }
+                        @if (HttpContextAccessor.HttpContext.Session.GetString("JWTToken") != null &&
+                                                HttpContextAccessor.HttpContext.Session.GetString("UserRole") == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="AllSubmissions">
+                                    Manage Submissions
+                                </a>
+                            </li>
+                        }
                     </ul>
 
                     @* ✅ Right side of Navbar *@

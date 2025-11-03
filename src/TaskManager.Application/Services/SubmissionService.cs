@@ -49,14 +49,37 @@ namespace TaskManager.Application.Services
             return true;
         }
 
-        Task<List<SubmissionDto>> ISubmissionService.GetByUserIdAsync(int userId)
+        public async Task<List<SubmissionDto>> GetByUserIdAsync(int userId)
         {
-            throw new NotImplementedException();
+            var submissions = await _submissionRepo.GetByUserIdAsync(userId);
+
+            return submissions.Select(s => new SubmissionDto
+            {
+                Id = s.Id,
+                FormId = s.FormId,
+                FormTitle = s.Form?.Title ?? "",
+                Answers = s.Answers,
+                Status = s.Status,
+                CreatedAt = s.CreatedAt
+            }).ToList();
         }
 
-        Task<List<SubmissionDto>> ISubmissionService.GetAllAsync()
+        public async Task<List<SubmissionDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var submissions = await _submissionRepo.GetAllAsync();
+
+            return submissions.Select(s => new SubmissionDto
+            {
+                Id = s.Id,
+                FormId = s.FormId,
+                FormTitle = s.Form?.Title ?? "",
+                Answers = s.Answers,
+                Status = s.Status,
+                CreatedAt = s.CreatedAt
+            }).ToList();
         }
+
+
+
     }
 }

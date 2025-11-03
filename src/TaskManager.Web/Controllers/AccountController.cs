@@ -8,10 +8,14 @@ namespace TaskManager.Web.Controllers
     public class AccountController : Controller
     {
         private readonly ApiService _api;
+        private readonly HttpClient _client;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountController(ApiService api)
+        public AccountController(ApiService api, HttpClient client, IHttpContextAccessor httpContextAccessor)
         {
             _api = api;
+            _client = client;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult Index()
@@ -27,6 +31,10 @@ namespace TaskManager.Web.Controllers
         public async Task<IActionResult> Login(LoginRequest request)
         {
             var response = await _api.Post("api/auth/login", request);
+
+            //var token = _httpContextAccessor.HttpContext.Session.GetString("JWTToken");
+
+
             if (!response.IsSuccessStatusCode)
             {
                 ViewBag.Error = "Invalid credentials";
@@ -37,7 +45,9 @@ namespace TaskManager.Web.Controllers
             var json = JsonSerializer.Deserialize<JsonElement>(result);
             var token = json.GetProperty("accessToken").GetString();
 
-            HttpContext.Session.SetString("JWTToken", token);
+            _httpContextAccessor.HttpContext.Session.SetString("JWTToken", token);
+
+
             return RedirectToAction("Index", "Home");
         }
 

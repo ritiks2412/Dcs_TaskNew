@@ -12,5 +12,8 @@ namespace TaskManager.Application.Interfaces
         Task<List<SubmissionDto>> GetByUserIdAsync(int userId);
         Task<List<SubmissionDto>> GetAllAsync();
 
+        //Task<DashboardStatsDto> GetDashboardStatsAsync();
+
+
     }
 }

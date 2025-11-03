@@ -66,5 +66,13 @@ namespace TaskManager.API.Controllers
             return Ok(submissions);
         }
 
+        //[HttpGet("dashboard")]
+        //public async Task<IActionResult> GetDashboard()
+        //{
+        //    var data = await _submissionService.GetDashboardStatsAsync();
+        //    return Ok(data);
+        //}
+
+
     }
 }

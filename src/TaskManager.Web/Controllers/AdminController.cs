@@ -59,5 +59,9 @@ namespace TaskManager.Web.Controllers
             await _api.Put("api/submissions/status", data);
             return RedirectToAction("AllSubmissions");
         }
+        public IActionResult Index()
+        {
+            return View(); 
+        }
     }
 }

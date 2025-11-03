@@ -2,8 +2,33 @@
 
 <h2>Register</h2>
 <form method="post">
-    <input type="text" name="Name" placeholder="Name" required />
-    <input type="email" name="Email" placeholder="Email" required />
-    <input type="password" name="Password" placeholder="Password" required />
+    <div>
+        <label>Name</label>
+        <input type="text" name="Name" value="@Model?.Name" required />
+    </div>
+
+    <div>
+        <label>Email</label>
+        <input type="email" name="Email" value="@Model?.Email" required />
+    </div>
+
+    <div>
+        <label>Password</label>
+        <input type="password" name="Password" required />
+    </div>
+
+    <div>
+        <label>Role</label>
+        <select name="Role" class="form-select">
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
+        </select>
+    </div>
+
     <button type="submit">Register</button>
 </form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}

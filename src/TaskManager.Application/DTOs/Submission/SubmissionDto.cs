@@ -11,4 +11,15 @@
         public string Status { get; set; } = "Pending";
         public DateTime CreatedAt { get; set; }
     }
+
+    public class DashboardStatsDto
+    {
+        public int TotalUsers { get; set; }
+        public int TotalForms { get; set; }
+        public int TotalSubmissions { get; set; }
+        public int PendingSubmissions { get; set; }
+        public int ApprovedSubmissions { get; set; }
+        public int RejectedSubmissions { get; set; }
+    }
+
 }
