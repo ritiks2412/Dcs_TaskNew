@@ -33,7 +33,7 @@ namespace TaskManager.API.Controllers
             if (form == null) return NotFound();
             return Ok(form);
         }
-        //[Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateForm([FromBody] CreateFormDto dto)
         {

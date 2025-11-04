@@ -28,7 +28,6 @@ namespace TaskManager.Web.Controllers
             return View(forms);
         }
 
-        // ✅ 2. Create Form - View
         public IActionResult Create()
         {
             if (HttpContext.Session.GetString("JWTToken") == null)
@@ -37,7 +36,6 @@ namespace TaskManager.Web.Controllers
             return View();
         }
 
-        // ✅ 3. Create Form - POST
         [HttpPost]
         public async Task<IActionResult> Create(CreateFormDto model)
         {
