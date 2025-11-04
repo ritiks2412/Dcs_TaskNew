@@ -48,6 +48,8 @@ namespace TaskManager.Web.Controllers
             _httpContextAccessor.HttpContext.Session.SetString("JWTToken", token);
 
 
+            var getToken = _httpContextAccessor.HttpContext.Session.GetString("JWTToken");
+
             return RedirectToAction("Index", "Home");
         }
 

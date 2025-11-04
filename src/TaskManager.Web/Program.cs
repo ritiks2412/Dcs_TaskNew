@@ -19,6 +19,27 @@ namespace TaskManager.Web
             });
 
 
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            //builder.Services.AddHttpContextAccessor();
+
+            // Register the handler
+            builder.Services.AddTransient<AuthenticationDelegatingHandler>();
+
+            // Configure your HttpClient (assuming you're using IHttpClientFactory)
+            //builder.Services.AddHttpClient("API", client =>
+            //{
+            //    client.BaseAddress = new Uri("https://localhost:7293/");
+            //})
+            //.AddHttpMessageHandler<AuthenticationDelegatingHandler>();
+
+
             var app = builder.Build();
             app.UseSession();
             // Configure the HTTP request pipeline.

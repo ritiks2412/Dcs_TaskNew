@@ -27,6 +27,7 @@ namespace TaskManager.Web.Services
         }
         public async Task<HttpResponseMessage> Post(string url, object data)
         {
+            SetToken();
             var json = JsonSerializer.Serialize(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             return await _client.PostAsync(url, content);
