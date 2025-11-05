@@ -31,7 +31,6 @@
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
-                        @* ✅ Show only when user is logged in *@
                         @if (HttpContextAccessor.HttpContext.Session.GetString("JWTToken") != null)
                         {
                             <li class="nav-item">
@@ -49,7 +48,6 @@
                         }
                     </ul>
 
-                    @* ✅ Right side of Navbar *@
                     <ul class="navbar-nav">
                         @if (HttpContextAccessor.HttpContext.Session.GetString("JWTToken") == null)
                         {

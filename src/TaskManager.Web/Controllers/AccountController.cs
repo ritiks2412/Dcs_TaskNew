@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using System.Text.Json;
 using TaskManager.Web.Models;
 using TaskManager.Web.Services;
@@ -47,8 +50,13 @@ namespace TaskManager.Web.Controllers
 
             _httpContextAccessor.HttpContext.Session.SetString("JWTToken", token);
 
+            var handler = new JwtSecurityTokenHandler();
+            var jwt = handler.ReadJwtToken(token);
+            var role = jwt.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 
-            var getToken = _httpContextAccessor.HttpContext.Session.GetString("JWTToken");
+
+            HttpContext.Session.SetString("UserRole", role);
+
 
             return RedirectToAction("Index", "Home");
         }

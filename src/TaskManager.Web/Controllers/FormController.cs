@@ -24,8 +24,13 @@ namespace TaskManager.Web.Controllers
                 return View(new List<FormDto>());
 
             var result = await response.Content.ReadAsStringAsync();
-            var forms = JsonSerializer.Deserialize<List<FormDto>>(result);
-            return View(forms);
+
+            var formDtos = JsonSerializer.Deserialize<List<FormDtos>>(result, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            return View(formDtos);
         }
 
         public IActionResult Create()
@@ -43,6 +48,9 @@ namespace TaskManager.Web.Controllers
 
             if (response.IsSuccessStatusCode)
                 return RedirectToAction("Index");
+
+
+
 
             ViewBag.Error = "Failed to create form!";
             return View(model);

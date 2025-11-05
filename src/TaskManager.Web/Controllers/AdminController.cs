@@ -19,7 +19,7 @@ namespace TaskManager.Web.Controllers
         //  Fetch all submissions
         public async Task<IActionResult> AllSubmissions()
         {
-            var response = await _api.Get("api/submissions");
+            var response = await _api.Get("api/submissions/all");
             var list = new List<SubmissionDto>();
 
             if (response.IsSuccessStatusCode)

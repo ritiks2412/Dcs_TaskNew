@@ -25,7 +25,13 @@ namespace TaskManager.Web.Controllers
             if (!response.IsSuccessStatusCode) return RedirectToAction("Index", "Form");
 
             var json = await response.Content.ReadAsStringAsync();
-            var form = JsonSerializer.Deserialize<FormDto>(json);
+            //var form = JsonSerializer.Deserialize<FormDtos>(json);
+
+            var form = JsonSerializer.Deserialize<FormDtos>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
 
             return View(form);
         }
@@ -43,6 +49,8 @@ namespace TaskManager.Web.Controllers
             };
 
             var response = await _api.Post("api/submissions", request);
+
+            
             if (response.IsSuccessStatusCode)
                 return RedirectToAction("MySubmissions");
 
@@ -50,7 +58,7 @@ namespace TaskManager.Web.Controllers
             return RedirectToAction("FillForm", new { formId });
         }
 
-        
+
         public async Task<IActionResult> MySubmissions()
         {
             if (HttpContext.Session.GetString("JWTToken") == null)
@@ -60,7 +68,15 @@ namespace TaskManager.Web.Controllers
             if (!response.IsSuccessStatusCode) return View(new List<SubmissionDto>());
 
             var json = await response.Content.ReadAsStringAsync();
-            var submissions = JsonSerializer.Deserialize<List<SubmissionDto>>(json);
+            //var submissions = JsonSerializer.Deserialize<List<SubmissionDto>>(json);
+
+
+            var submissions = JsonSerializer.Deserialize<List<SubmissionDto>>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+
 
             return View(submissions);
         }

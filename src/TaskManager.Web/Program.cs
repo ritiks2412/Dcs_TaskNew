@@ -1,5 +1,5 @@
-using TaskManager.Web.Services;
-
+﻿using TaskManager.Web.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 namespace TaskManager.Web
 {
     public class Program
@@ -18,6 +18,25 @@ namespace TaskManager.Web
                 client.BaseAddress = new Uri("https://localhost:7293/"); 
             });
 
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
+                System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
+
+
+            builder.Services.AddAuthorization();
+
+            builder.Services.AddSession();
 
 
             builder.Services.AddSession(options =>

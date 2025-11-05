@@ -1,16 +1,14 @@
-﻿@model TaskManager.Web.Models.FormDto
+﻿@model TaskManager.Web.Models.FormDtos
 
 <h2>Fill Form - @Model.Title</h2>
+
 <form method="post" asp-action="SubmitForm">
     <input type="hidden" name="formId" value="@Model.Id" />
 
     <div>
-        <label>Enter Answers (JSON Format)</label>
+        <label>Enter Answers (Matching Form Fields)</label>
         <textarea name="answers" class="form-control" rows="6" required>
-        {
-            "Name": "",
-            "Email": ""
-        }
+@Model.Fields
         </textarea>
     </div>
     <br />
